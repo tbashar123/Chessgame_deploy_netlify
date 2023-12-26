@@ -1,3 +1,5 @@
+# urls.py in the chess folder
+
 from django.urls import path
 from . import views
 

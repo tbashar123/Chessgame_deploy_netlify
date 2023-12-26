@@ -1,0 +1,19 @@
+<!-- game_detail.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Detail</title>
+</head>
+<body>
+    <h1>Game Details</h1>
+    <p>Game ID: {{ game.id }}</p>
+    <p>Game Name: {{ game.name }}</p>
+    <!-- Add more game details here as needed -->
+
+    <!-- Link to the game board view -->
+    <a href="{% url 'chess:game_board' game_id=game.id %}">Go to Game Board</a>
+
+    <!-- Add other content or functionality of the game detail page -->
+</body>
+</html>

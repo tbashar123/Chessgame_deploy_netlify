@@ -1,16 +1,63 @@
-<h1>Chess Game</h1>
-<h2>Player Turn: {{ game.turn }}</h2>
+<!-- chess/board.html -->
 
-<!-- Render the chessboard here -->
-<!-- You can use HTML tables or CSS grids to represent the chessboard -->
-<!-- Iterate over the game.board data to display the chess pieces -->
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>Make a Move:</h2>
-<form action="{% url 'chess:make_move' game_id=game.id %}" method="post">
-    {% csrf_token %}
-    <label for="source">Source:</label>
-    <input type="text" name="source" required>
-    <label for="destination">Destination:</label>
-    <input type="text" name="destination" required>
-    <input type="submit" value="Submit">
-</form>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <style>
+        /* Add your CSS styles here */
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            grid-template-rows: repeat(8, 50px);
+        }
+
+        .chessboard div {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid #ccc;
+        }
+
+        .white {
+            background-color: #f0d9b5;
+        }
+
+        .black {
+            background-color: #b58863;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Chess Game</h1>
+    <h2>Player Turn: {{ game.turn }}</h2>
+
+    <div class="chessboard">
+        {% for row in chessboard %}
+            {% for piece in row %}
+                <div class="{% cycle 'white' 'black' %}">
+                    {% if piece %}
+                        {{ piece }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <h2>Make a Move:</h2>
+    <form action="{% url 'chess:make_move' game_id=game.id %}" method="post">
+        {% csrf_token %}
+        <label for="source">Source:</label>
+        <input type="text" name="source" required>
+        <label for="destination">Destination:</label>
+        <input type="text" name="destination" required>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
